@@ -1,14 +1,15 @@
 import React from 'react'
-
-export const metadata = {
-  title: "Test"
-};
+import Hero from '@/components/Hero'
+import InfoBoxes from '@/components/InfoBoxes'
+import HomeProperties from '@/components/HomeProperties'
 
 const HomePage = () => {
   return (
-    <div>
-      Homepage
-    </div>
+    <>
+      <Hero />
+      <InfoBoxes />
+      <HomeProperties />
+    </>
   )
 }
 
