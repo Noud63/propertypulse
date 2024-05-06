@@ -3,27 +3,27 @@ import { useState, useEffect } from "react";
 
 const PropertyAddForm = () => {
   const [fields, setFields] = useState({
-    type: "Apartment",
-    name: "Test Property",
+    type: "",
+    name: "",
     description: "",
     location: {
       street: "",
-      city: "Test City",
-      state: "Test State",
+      city: "",
+      state: "",
       zipcode: "",
     },
-    beds: "3",
-    baths: "2",
-    square_feet: "1800",
+    beds: "",
+    baths: "",
+    square_feet: "",
     amenities: [],
     rates: {
       weekly: "",
-      monthly: "2000",
+      monthly: "",
       nightly: "",
     },
     seller_info: {
       name: "",
-      email: "Test Email",
+      email: "",
       phone: "",
     },
     images: [],
@@ -97,10 +97,11 @@ const PropertyAddForm = () => {
     }))
   };
 
-  return (
-    <form>
-      <h2 className="text-3xl text-center font-semibold mb-6">Add Property</h2>
+  // encType = "multipart/form-data" for submitting images
 
+  return (
+    <form action="/api/properties" method="POST" encType="multipart/form-data">
+      <h2 className="text-3xl text-center font-semibold mb-6">Add Property</h2>
       <div className="mb-4">
         <label htmlFor="type" className="block text-gray-700 font-bold mb-2">
           Property Type
@@ -154,7 +155,6 @@ const PropertyAddForm = () => {
           onChange={handleChange}
         ></textarea>
       </div>
-
       <div className="mb-4 bg-blue-50 p-4">
         <label className="block text-gray-700 font-bold mb-2">Location</label>
         <input
@@ -196,7 +196,6 @@ const PropertyAddForm = () => {
           onChange={handleChange}
         />
       </div>
-
       <div className="mb-4 flex flex-wrap">
         <div className="w-full sm:w-1/3 pr-2">
           <label htmlFor="beds" className="block text-gray-700 font-bold mb-2">
@@ -244,7 +243,6 @@ const PropertyAddForm = () => {
           />
         </div>
       </div>
-
       {/* Amenities checkboxes */}
       <div className="mb-4">
         <label className="block text-gray-700 font-bold mb-2">Amenities</label>
@@ -435,7 +433,6 @@ const PropertyAddForm = () => {
           </div>
         </div>
       </div>
-
       <div className="mb-4 bg-blue-50 p-4">
         <label className="block text-gray-700 font-bold mb-2">
           Rates (Leave blank if not applicable)
@@ -482,7 +479,6 @@ const PropertyAddForm = () => {
           </div>
         </div>
       </div>
-
       <div className="mb-4">
         <label
           htmlFor="seller_name"
@@ -493,7 +489,7 @@ const PropertyAddForm = () => {
         <input
           type="text"
           id="seller_name"
-          name="seller_info.name."
+          name="seller_info.name"
           className="border rounded w-full py-2 px-3"
           placeholder="Name"
           value={fields.seller_info.name}
@@ -535,7 +531,6 @@ const PropertyAddForm = () => {
           onChange={handleChange}
         />
       </div>
-
       <div className="mb-4">
         <label htmlFor="images" className="block text-gray-700 font-bold mb-2">
           Images (Select up to 4 images)
@@ -548,9 +543,9 @@ const PropertyAddForm = () => {
           accept="image/*"
           multiple
           onChange={handleImageChange}
+          required
         />
       </div>
-
       <div>
         <button
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"

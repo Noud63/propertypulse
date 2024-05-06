@@ -7,12 +7,10 @@ export const GET = async (request, { params }) => {
     await connectDB();
 
     const property = await Property.findById(params.id);
-    console.log(property);
 
     if (!property) {
       return new Response("Property not found!", { status: 404 });
     }
-    console.log(property);
     return new Response(JSON.stringify(property), { status: 200 });
   } catch (error) {
     console.log(error);
