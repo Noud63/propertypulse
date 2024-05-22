@@ -32,12 +32,17 @@ const PropertyContactForm = ({ property }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(data),   
       });
 
       if (res.status === 200) {
         toast.success("Message sent successfully");
         setWasSubmitted(true);
+
+        setTimeout(()=> {
+            setWasSubmitted(false);
+        },5000)
+        
       } else if (res.status === 400 || res.status === 401) {
         const dataObj = await res.json();
         toast.error(dataObj.message);

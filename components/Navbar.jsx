@@ -8,8 +8,6 @@ import {FaGoogle} from 'react-icons/fa'
 import Link from 'next/link';
 import { signIn, signOut, useSession, getProviders} from 'next-auth/react'
    
-
-
 const Navbar = () => {
 
   const {data:session} = useSession()
@@ -24,10 +22,14 @@ const pathname = usePathname()
 useEffect(() => {
   const setAuthProviders = async() => {
     const res = await getProviders()
+
     setProviders(res)
+    
   }
     setAuthProviders()
 },[])
+
+console.log(providers);
 
 return (
   <nav className="bg-blue-700 border-b border-blue-500">
