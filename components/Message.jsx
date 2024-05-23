@@ -1,10 +1,15 @@
 "use client"
 import React, {useState, useEffect} from 'react'
+import { FaBullseye } from 'react-icons/fa'
 import { toast } from "react-toastify"
+import { useGlobalContext } from '@/context/GlobalContext'
 
 const Message = ({message}) => {
 
 const [ isRead, setIsRead ] = useState(message.read)
+const [ isDeleted, setIsDeleted] = useState(false)
+
+ const { unreadCount, setUnreadCount } = useGlobalContext();
 
 const handleReadClick = async () => {
      try {
@@ -15,6 +20,7 @@ const handleReadClick = async () => {
          if(res.status === 200) {
           const { read } = await res.json()
           setIsRead(read)
+          setUnreadCount((prevCount) => (read ? prevCount - 1 : prevCount + 1))
           if(read){
             toast.success("Marked as Read!")
           }else{
@@ -25,6 +31,27 @@ const handleReadClick = async () => {
         console.log(error)
         toast.error("Something went wrong!")
      }
+}
+
+const handleDeleteClick = async () => {
+  try {
+    const res = await fetch(`/api/messages/${message._id}`, {
+      method: "DELETE"
+    })
+
+    if(res.status === 200){
+      setIsDeleted(true);
+      setUnreadCount((prevCount) => prevCount -1)
+      toast.success("Message deleted!")
+    }
+  } catch (error) {
+      console.log(error)
+      toast.error("Message was not deleted!")
+  }
+}
+
+if(isDeleted){
+  return null
 }
 
   return (
@@ -70,7 +97,7 @@ const handleReadClick = async () => {
       >
         {isRead ? "Mark as New" : "Mark as Read"}
       </button>
-      <button className="mt-4 bg-red-500 text-white py-1 px-3 rounded-md">
+      <button onClick={handleDeleteClick} className="mt-4 bg-red-500 text-white py-1 px-3 rounded-md">
         Delete
       </button>
     </div>

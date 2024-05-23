@@ -4,6 +4,7 @@ import Footer from '@/components/Footer'
 import AuthProvider from '@/components/AuthProvider'
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { GlobalProvider } from '@/context/GlobalContext';
 
 export const metadata = {
     title: "PorpertyPulse | Find the perfect Rental",
@@ -15,12 +16,14 @@ const MainLayout = ({children}) => {
   return (
     <html lang="en">
       <body>
-        <AuthProvider>
-          <Navbar />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-          <ToastContainer />
-        </AuthProvider>
+        <GlobalProvider>
+          <AuthProvider>
+            <Navbar />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
+            <ToastContainer />
+          </AuthProvider>
+        </GlobalProvider>
       </body>
     </html>
   );
