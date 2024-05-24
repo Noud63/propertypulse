@@ -3,16 +3,15 @@ import Property from "@/models/Property"
 import { getSessionUser } from "@/utils/getSessionUser"
 import cloudinary from "@/config/cloudinary"
 
-export const dynamic = "force-dynamic";
-
 // Get /api/properties
 export const GET = async (request) => {
-   try {
-    await connectDB()
-
     const page = request.nextUrl.searchParams.get("page") || 1;
     const pageSize = request.nextUrl.searchParams.get("pageSize") || 3;
 
+   try {
+    await connectDB()
+
+   
     const skip = (page - 1) * pageSize
 
     const total = await Property.countDocuments({})
