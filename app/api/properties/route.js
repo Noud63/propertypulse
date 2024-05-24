@@ -6,7 +6,7 @@ import cloudinary from "@/config/cloudinary"
 
 // Get /api/properties
 export const GET = async (request) => {
-   
+   try {
     await connectDB()
 
     const page = request.nextUrl.searchParams.get("page") || 1;
@@ -24,7 +24,10 @@ export const GET = async (request) => {
     }
     
        return new Response(JSON.stringify(result), {status: 200})   // result is now an object!
-  
+   } catch (error) {
+    console.log(error)
+       return new Response('Something went wrong', {status:500})
+   }
 }
 
 
