@@ -5,9 +5,9 @@ import { fetchProperties } from '@/utils/request';
 
 const HomeProperties = async () => {
 
-const properties = await fetchProperties()
+const data = await fetchProperties()
 
-const recentProperties = properties.sort(() => Math.random() - 0.5).slice(0,3);
+const recentProperties = data.properties.sort(() => Math.random() - 0.5).slice(0,3);
     
   return (
     <>

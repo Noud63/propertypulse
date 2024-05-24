@@ -6,6 +6,7 @@ const GlobalContext = createContext()
 
 // Create a provider 
 export function GlobalProvider({ children}) {
+    
 const [unreadCount, setUnreadCount] = useState(0);
 
      return (
