@@ -3,6 +3,7 @@ import Property from "@/models/Property"
 import { getSessionUser } from "@/utils/getSessionUser"
 import cloudinary from "@/config/cloudinary"
 
+export const dynamic = "force-dynamic";
 
 // Get /api/properties
 export const GET = async (request) => {
