@@ -3,11 +3,10 @@ import Property from "@/models/Property"
 import { getSessionUser } from "@/utils/getSessionUser"
 import cloudinary from "@/config/cloudinary"
 
-export const dynamic = "force-dynamic";
 
 // Get /api/properties
 export const GET = async (request) => {
-   try {
+   
     await connectDB()
 
     const page = request.nextUrl.searchParams.get("page") || 1;
@@ -25,10 +24,7 @@ export const GET = async (request) => {
     }
     
        return new Response(JSON.stringify(result), {status: 200})   // result is now an object!
-   } catch (error) {
-    console.log(error)
-       return new Response('Something went wrong', {status:500})
-   }
+  
 }
 
 
