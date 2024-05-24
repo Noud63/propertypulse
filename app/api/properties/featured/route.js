@@ -12,6 +12,6 @@ export const GET = async (request) => {
     return new Response(JSON.stringify(properties), { status: 200 }); // result is now an object!
 
  
-    return new Response("Something went wrong", { status: 500 });
+    
   
 };
